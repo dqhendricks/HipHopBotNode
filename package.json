@@ -1,0 +1,16 @@
+{
+  "name": "twitter-markov-bot",
+  "version": "1.0.0",
+  "description": "Random jibberish.",
+  "main": "app.js",
+  "repository": "git@github.com:dqhendricks/TwitterMarkovBotNode",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Dustin Hendricks",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.9"
+  },
+  "devDependencies": {}
+}

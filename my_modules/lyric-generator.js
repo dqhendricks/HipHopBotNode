@@ -35,7 +35,8 @@ class LyricGenerator {
 			'bitch': 'b***h',
 			'cock': 'c**k',
 			'cunt': 'c**t',
-			'shit': 's**t'
+			'shit': 's**t',
+			'nigga': 'n***a'
 		};
 	}
 	
@@ -48,12 +49,12 @@ class LyricGenerator {
 	}
 	
 	trainFromText( text ) {
+		// creates reverse Markov chain data from training text
 		text = text.toLowerCase().replace( /\?|:|!/g, '.' ).replace( /,|;|"|\(|\)|\[.*?\]/g, '' );
 		
 		const verses = text.split( '"\r\n"' );
 		
 		verses.forEach( verse => {
-			
 			const textSentences = verse.replace( /\s+/g, ' ' ).split( '.' );
 			
 			textSentences.forEach( sentence => {
@@ -90,6 +91,7 @@ class LyricGenerator {
 	}
 	
 	generateCompoundLyric( characterLimit = 140, rhymeWith = null ) {
+		// braids two lyric pairs
 		const pairLimit = Math.floor( ( characterLimit - 6 ) / 2 );
 		var lyricPair1 = this.generateLyricPair( pairLimit, rhymeWith );
 		if ( !lyricPair1 ) return 'Sorry, but that word doesn\'t really inspire me';
@@ -149,6 +151,7 @@ class LyricGenerator {
 			rhymeWithFinal = ( !rhymeWith ) ? this.randomRhymeWord() : rhymeWith;
 			rhymeWithFinal = rhymeWithFinal.toLowerCase();
 			firstHalf = this.randomSegmentFromWord( rhymeWithFinal );
+			// if exact word match not found in data, rhyme with it instead
 			if ( !firstHalf ) firstHalf = this.randomSegmentFromRhymingWord( rhymeWithFinal );
 			secondHalf = this.randomSegmentFromRhymingWord( rhymeWithFinal );
 		
@@ -156,8 +159,6 @@ class LyricGenerator {
 		}
 		
 		// whichever has the fewer syllables has a word added, until char limit reached, or match not found
-		// do syllable counts need to match?
-		
 		while ( true ) {
 			var sentenceSegment;
 			if ( syllable( firstHalf ) > syllable( secondHalf ) ) {
@@ -177,7 +178,42 @@ class LyricGenerator {
 		};
 	}
 	
+	generateSentenceSegment( sentence ) {
+		// finds next link in reverse Markov chain
+		const words = sentence.split( ' ' );
+		const key = `${ words[0] } ${ words[1] }`;
+		if ( key in this.data ) {
+			return this.randomProperty( this.data[key] );
+		} else {
+			return null;
+		}
+	}
+	
+	randomRhymeWord() {
+		// picks a word from existing keys
+		var rhymeWord;
+		do {
+			rhymeWord = this.randomProperty( this.data ).split( ' ' )[1];
+		} while ( this.badTrailingElements.includes( rhymeWord ) );
+		return rhymeWord;
+	}
+	
+	randomSegmentFromWord( word ) {
+		// finds a segment that ends with word
+		const keys = Object.keys( this.data );
+		const matchKeys = [];
+		keys.forEach( key => {
+			if ( key.split( ' ' )[1] == word ) matchKeys.push( key );
+		} );
+		if ( matchKeys.length == 0 ) {
+			return null;
+		} else {
+			return matchKeys[Math.floor( Math.random() * matchKeys.length )];
+		}
+	}
+	
 	randomSegmentFromRhymingWord( rhymingWord ) {
+		// finds a segment that rhymes with rhymingWord
 		var secondHalf = null;
 		var rhymeWords = rhymes( rhymingWord );
 		
@@ -192,37 +228,6 @@ class LyricGenerator {
 		return secondHalf;
 	}
 	
-	generateSentenceSegment( sentence ) {
-		const words = sentence.split( ' ' );
-		const key = `${ words[0] } ${ words[1] }`;
-		if ( key in this.data ) {
-			return this.randomProperty( this.data[key] );
-		} else {
-			return null;
-		}
-	}
-	
-	randomRhymeWord() {
-		var rhymeWord;
-		do {
-			rhymeWord = this.randomProperty( this.data ).split( ' ' )[1];
-		} while ( this.badTrailingElements.includes( rhymeWord ) );
-		return rhymeWord;
-	}
-	
-	randomSegmentFromWord( word ) {
-		const keys = Object.keys( this.data );
-		const matchKeys = [];
-		keys.forEach( key => {
-			if ( key.split( ' ' )[1] == word ) matchKeys.push( key );
-		} );
-		if ( matchKeys.length == 0 ) {
-			return null;
-		} else {
-			return matchKeys[Math.floor( Math.random() * matchKeys.length )];
-		}
-	}
-	
 	formatLyricPair( lyricPair ) {
 		lyricPair.firstHalf = this.formatSentence( lyricPair.firstHalf );
 		lyricPair.secondHalf = this.formatSentence( lyricPair.secondHalf );
@@ -230,6 +235,7 @@ class LyricGenerator {
 	}
 	
 	formatSentence( sentence ) {
+		// muting and other post processing
 		_.forIn( this.mutedWords, ( value, key ) => {
 			sentence = sentence.replace( key, value );
 		} );

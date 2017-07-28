@@ -88,7 +88,7 @@ class LyricGenerator {
 		return `${ lyricPair.firstHalf }\r\n${ lyricPair.secondHalf }`;
 	}
 	
-	generateCompoundLyricBraided( characterLimit = 140, rhymeWith = null ) {
+	generateCompoundLyric( characterLimit = 140, rhymeWith = null ) {
 		const pairLimit = Math.floor( ( characterLimit - 6 ) / 2 );
 		var lyricPair1 = this.generateLyricPair( pairLimit, rhymeWith );
 		if ( !lyricPair1 ) return 'Sorry, but that word doesn\'t really inspire me';

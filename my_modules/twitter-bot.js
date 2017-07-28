@@ -15,7 +15,7 @@ class TwitterBot {
 			this.twit.post( 'statuses/update', { status: this.generateLyric() }, ( err, data, response ) => {
 				console.log( data );
 			} );
-		}, 1000 * 60 * 60 * 1 );
+		}, 1000 * 60 * 60 * 0.5 );
 	}
 	
 	beginTaggedPostResponses() {
@@ -41,7 +41,7 @@ class TwitterBot {
 	}
 	
 	generateLyric( characterLimit = null, rhymeWord = null ) {
-		return this.lyricGenerator.generateCompoundLyricBraided( characterLimit, rhymeWord );
+		return this.lyricGenerator.generateCompoundLyric( characterLimit, rhymeWord );
 	}
 	
 	extractRhymeWordFromStatus( statusText ) {

@@ -10,6 +10,9 @@
   "author": "Dustin Hendricks",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.4",
+    "rhymes": "^1.0.1",
+    "syllable": "^2.2.0",
     "twit": "^2.2.9"
   },
   "devDependencies": {}

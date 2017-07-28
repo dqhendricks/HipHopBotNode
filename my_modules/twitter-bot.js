@@ -14,7 +14,7 @@ class TwitterBot {
 		this.postStatus();
 		setInterval( () => {
 			this.postStatus();
-		}, 1000 * 60 * 60 * 0.5 );
+		}, 1000 * 60 * 60 * 1 );
 	}
 	
 	postStatus() {

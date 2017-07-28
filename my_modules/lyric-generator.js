@@ -74,7 +74,7 @@ class LyricGenerator {
 	
 	generateSimpleLyric( characterLimit = 140, rhymeWith = null ) {
 		var lyricPair = this.generateLyricPair( characterLimit - 2, rhymeWith );
-		if ( !lyricPair ) return 'Sorry, but that word doesn\'t really inspire me';
+		if ( !lyricPair ) return 'Sorry, but that word doesn\'t really inspire me.';
 		
 		const lowestSyllables = this.getLowestSyllables( lyricPair.firstHalf, lyricPair.secondHalf );
 		lyricPair = this.formatLyricPair( this.limitSyllablesLyricPair( lyricPair, lowestSyllables ) );

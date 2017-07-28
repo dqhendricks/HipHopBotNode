@@ -22,7 +22,7 @@ class TwitterBot {
 		var stream = this.twit.stream( 'statuses/filter', { track: '@the_lyric_bot' } )
  
 		stream.on( 'tweet', status => {
-			if ( this.twit.queueLength() < 500 ) {
+			if ( status.user.screen_name != 'the_lyric_bot' && this.twit.queueLength() < 500 ) {
 				var rhymeWord = this.extractRhymeWordFromStatus( status.text );
 				var replyText;
 				if ( !rhymeWord ) {

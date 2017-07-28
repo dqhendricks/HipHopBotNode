@@ -88,19 +88,6 @@ class LyricGenerator {
 		return `${ lyricPair.firstHalf }\r\n${ lyricPair.secondHalf }`;
 	}
 	
-	generateCompoundLyric( characterLimit = 140, rhymeWith = null ) {
-		const pairLimit = Math.floor( ( characterLimit - 6 ) / 2 );
-		var lyricPair1 = this.generateLyricPair( pairLimit, rhymeWith );
-		if ( !lyricPair1 ) return 'Sorry, but that word doesn\'t really inspire me';
-		var lyricPair2 = this.generateLyricPair( pairLimit );
-		
-		const lowestSyllables = this.getLowestSyllables( lyricPair1.firstHalf, lyricPair1.secondHalf, lyricPair2.firstHalf, lyricPair2.secondHalf );
-		lyricPair1 = this.formatLyricPair( this.limitSyllablesLyricPair( lyricPair1, lowestSyllables ) );
-		lyricPair2 = this.formatLyricPair( this.limitSyllablesLyricPair( lyricPair2, lowestSyllables ) );
-		
-		return `${ lyricPair1.firstHalf }\r\n${ lyricPair1.secondHalf }\r\n${ lyricPair2.firstHalf }\r\n${ lyricPair2.secondHalf }`;
-	}
-	
 	generateCompoundLyricBraided( characterLimit = 140, rhymeWith = null ) {
 		const pairLimit = Math.floor( ( characterLimit - 6 ) / 2 );
 		var lyricPair1 = this.generateLyricPair( pairLimit, rhymeWith );

@@ -11,11 +11,16 @@ class TwitterBot {
 	}
 	
 	beginStatusPosts() {
+		this.postStatus();
 		setInterval( () => {
-			this.twit.post( 'statuses/update', { status: this.generateLyric() }, ( err, data, response ) => {
-				console.log( data );
-			} );
+			this.postStatus();
 		}, 1000 * 60 * 60 * 0.5 );
+	}
+	
+	postStatus() {
+		this.twit.post( 'statuses/update', { status: this.generateLyric() }, ( err, data, response ) => {
+			console.log( data );
+		} );
 	}
 	
 	beginTaggedPostResponses() {

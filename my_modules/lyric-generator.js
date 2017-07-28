@@ -34,7 +34,8 @@ class LyricGenerator {
 			'fuck': 'f**k',
 			'bitch': 'b***h',
 			'cock': 'c**k',
-			'cunt': 'c**t'
+			'cunt': 'c**t',
+			'shit': 's**t'
 		};
 	}
 	

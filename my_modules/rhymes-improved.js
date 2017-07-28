@@ -23,7 +23,7 @@ module.exports = function rhymes ( input ) {
 			results.push( merge( word, { score: score } ) );
 		}
 	} );
-	results = sortBy( results, 'score' ).reverse().slice(0, 50);
+	results = sortBy( results, 'score' ).reverse().slice(0, 150);
 
 	return results;
 }

@@ -180,6 +180,7 @@ class LyricGenerator {
 	randomSegmentFromRhymingWord( rhymingWord ) {
 		var secondHalf = null;
 		var rhymeWords = rhymes( rhymingWord );
+		
 		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
 		rhymeWords = this.shuffleArray( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
 		
@@ -218,7 +219,7 @@ class LyricGenerator {
 		if ( matchKeys.length == 0 ) {
 			return null;
 		} else {
-			return matchKeys[matchKeys.length * Math.random() << 0];
+			return matchKeys[Math.floor( Math.random() * matchKeys.length )];
 		}
 	}
 	
@@ -248,7 +249,7 @@ class LyricGenerator {
 		if ( keys.length == 0 ) {
 			return null;
 		} else {
-			return keys[keys.length * Math.random() << 0];
+			return keys[Math.floor( Math.random() * keys.length )];
 		}
 	}
 	

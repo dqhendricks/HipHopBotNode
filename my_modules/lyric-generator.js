@@ -178,7 +178,7 @@ class LyricGenerator {
 	}
 	
 	randomSegmentFromRhymingWord( rhymingWord ) {
-		secondHalf = null;
+		var secondHalf = null;
 		var rhymeWords = rhymes( rhymingWord );
 		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
 		rhymeWords = this.shuffleArray( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );

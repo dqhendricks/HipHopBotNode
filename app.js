@@ -10,5 +10,5 @@ const lyricGenerator = new LyricGenerator();
 lyricGenerator.trainFromFile( path.join( __dirname, 'data/hiphop.txt' ) );
 const twitterBot = new TwitterBot( twit, lyricGenerator );
 
-twitterBot.beginStatusPosts();
-twitterBot.beginTaggedPostResponses();
+//twitterBot.beginStatusPosts();
+//twitterBot.beginTaggedPostResponses();

@@ -18,7 +18,7 @@ class TwitterBot {
 	}
 	
 	postStatus() {
-		this.twit.post( 'statuses/update', { status: this.generateLyric() }, ( err, data, response ) => {
+		this.twit.post( 'statuses/update', { status: this.lyricGenerator.generateCompoundLyric() }, ( err, data, response ) => {
 			console.log( data );
 		} );
 	}
@@ -33,7 +33,7 @@ class TwitterBot {
 				if ( !rhymeWord ) {
 					replyText = 'Sorry, you sent me too many words. Try just one.';
 				} else {
-					replyText = this.generateLyric( 139, rhymeWord );
+					replyText = this.lyricGenerator.generateCompoundLyric( 139, rhymeWord );
 				}
 				this.twit.post( 'statuses/update', {
 					status: `@${ status.user.screen_name } ${ replyText }`,
@@ -43,10 +43,6 @@ class TwitterBot {
 				} );
 			}
 		} );
-	}
-	
-	generateLyric( characterLimit = null, rhymeWord = null ) {
-		return this.lyricGenerator.generateCompoundLyric( characterLimit, rhymeWord );
 	}
 	
 	extractRhymeWordFromStatus( statusText ) {

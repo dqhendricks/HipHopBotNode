@@ -149,15 +149,8 @@ class LyricGenerator {
 			rhymeWithFinal = ( !rhymeWith ) ? this.randomRhymeWord() : rhymeWith;
 			rhymeWithFinal = rhymeWithFinal.toLowerCase();
 			firstHalf = this.randomSegmentFromWord( rhymeWithFinal );
-			secondHalf = null;
-			var rhymeWords = rhymes( rhymeWithFinal );
-			rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
-			rhymeWords = this.shuffleArray( _.difference( rhymeWords, this.badTrailingElements, [ rhymeWithFinal ] ) );
-			
-			for ( var i = 0; i < rhymeWords.length; i++ ) {
-				secondHalf = this.randomSegmentFromWord( rhymeWords[i] );
-				if ( secondHalf ) break;
-			}
+			if ( !firstHalf ) firstHalf = this.randomSegmentFromRhymingWord( rhymeWithFinal );
+			secondHalf = this.randomSegmentFromRhymingWord( rhymeWithFinal );
 		
 			if ( rhymeWith && ( !firstHalf || !secondHalf ) ) return null;
 		}
@@ -182,6 +175,20 @@ class LyricGenerator {
 			firstHalf,
 			secondHalf
 		};
+	}
+	
+	randomSegmentFromRhymingWord( rhymingWord ) {
+		secondHalf = null;
+		var rhymeWords = rhymes( rhymingWord );
+		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
+		rhymeWords = this.shuffleArray( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
+		
+		for ( var i = 0; i < rhymeWords.length; i++ ) {
+			secondHalf = this.randomSegmentFromWord( rhymeWords[i] );
+			if ( secondHalf ) break;
+		}
+		
+		return secondHalf;
 	}
 	
 	generateSentenceSegment( sentence ) {

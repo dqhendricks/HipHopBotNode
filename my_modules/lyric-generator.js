@@ -105,7 +105,7 @@ class LyricGenerator {
 		lyricPair1 = this.formatLyricPair( this.limitSyllablesLyricPair( lyricPair1, lowestSyllables ) );
 		lyricPair2 = this.formatLyricPair( this.limitSyllablesLyricPair( lyricPair2, lowestSyllables ) );
 		
-		return `${ lyricPair2.firstHalf }, ${ lyricPair1.firstHalf }\r\n${ lyricPair2.secondHalf }, ${ lyricPair1.secondHalf }`;
+		return `${ lyricPair2.firstHalf }\r\n${ lyricPair1.firstHalf }\r\n${ lyricPair2.secondHalf }\r\n${ lyricPair1.secondHalf }`;
 	}
 	
 	getLowestSyllables( /* as many segments as needed */ ) {

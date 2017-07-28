@@ -47,7 +47,7 @@ class TwitterBot {
 	extractRhymeWordFromStatus( statusText ) {
 		statusText = statusText.replace( /@the_lyric_bot /g, '' ).trim().split( ' ' );
 		if ( statusText.length == 1 ) {
-			return statusText[0];
+			return statusText[0].toLowerCase();
 		} else {
 			return null;
 		}

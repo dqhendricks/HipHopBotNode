@@ -1,7 +1,7 @@
 const fs = require( 'fs' );
 const _ = require( 'lodash' );
 const syllable = require( 'syllable' );
-const rhymes = require( 'rhymes' );
+const rhymes = require( './rhymes-improved' );
 
 /*
 	this class will deconstruct training text, then use the data to generate random lyrics using reverse markov chains, a rhyme dictionary, and syllable counting

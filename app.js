@@ -12,3 +12,5 @@ const twitterBot = new TwitterBot( twit, lyricGenerator );
 
 twitterBot.beginStatusPosts();
 twitterBot.beginTaggedPostResponses();
+
+console.log( 'app started' );

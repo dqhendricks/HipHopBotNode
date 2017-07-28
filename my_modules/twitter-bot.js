@@ -41,7 +41,7 @@ class TwitterBot {
 	}
 	
 	generateLyric( characterLimit = null, rhymeWord = null ) {
-		return ( Math.random() < 0.5 ) ? this.lyricGenerator.generateCompoundLyric( characterLimit, rhymeWord ) : this.lyricGenerator.generateCompoundLyricBraided( characterLimit, rhymeWord );
+		return this.lyricGenerator.generateCompoundLyricBraided( characterLimit, rhymeWord );
 	}
 	
 	extractRhymeWordFromStatus( statusText ) {

@@ -22,6 +22,10 @@ class TwitQueued {
 		}
 	}
 	
+	queueLength() {
+		return this.queue.length;
+	}
+	
 	get( endPoint, parameters, callback ) {
 		this.queue.push( {
 			method: 'get',
@@ -38,6 +42,10 @@ class TwitQueued {
 			parameters,
 			callback
 		} );
+	}
+	
+	stream( endPoint, parameters ) {
+		return this.twit.stream( endPoint, parameters );
 	}
 }
 

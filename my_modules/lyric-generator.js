@@ -30,6 +30,12 @@ class LyricGenerator {
 			'your',
 			'we\'ll'
 		];
+		this.mutedWords = {
+			'fuck': 'f**k',
+			'bitch': 'b***h',
+			'cock': 'c**k',
+			'cunt': 'c**t'
+		};
 	}
 	
 	initializeData() {
@@ -228,6 +234,9 @@ class LyricGenerator {
 	}
 	
 	formatSentence( sentence ) {
+		_.forIn( this.mutedWords, ( value, key ) => {
+			sentence = sentence.replace( key, value );
+		} );
 		return `${ this.capitalizeFirstLetter( this.capitalizeIs( sentence ) ) }`;
 	}
 	

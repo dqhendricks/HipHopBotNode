@@ -52,7 +52,7 @@ class LyricGenerator {
 		// creates reverse Markov chain data from training text
 		text = text.toLowerCase().replace( /\?|:|!/g, '.' ).replace( /,|;|"|\(|\)|\[.*?\]/g, '' );
 		
-		const verses = text.split( '"\r\n"' );
+		const verses = text.split( '"\r\n"' ); // added for web scraping chrome plugin i used to gather training text
 		
 		verses.forEach( verse => {
 			const textSentences = verse.replace( /\s+/g, ' ' ).split( '.' );

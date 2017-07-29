@@ -105,6 +105,7 @@ class LyricGenerator {
 	}
 	
 	getLowestSyllables( /* as many segments as needed */ ) {
+		// finds which argument has the fewest syllables and returns that number
 		var lowest = null;
 		_.forIn( arguments, argument => {
 			const syllables = syllable( argument );
@@ -114,6 +115,7 @@ class LyricGenerator {
 	}
 	
 	limitSyllables( input, syllableLimit ) {
+		// attempts to trim syllables to syllable limit
 		var syllables = syllable( input );
 		const wordArray = input.split( ' ' );
 		while ( syllables > syllableLimit ) {

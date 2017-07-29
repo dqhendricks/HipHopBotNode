@@ -1,5 +1,5 @@
 const dict = require( 'cmu-pronouncing-dictionary' );
-const { merge, sortBy } = require( 'lodash' );
+const { merge } = require( 'lodash' );
 
 var words = [];
 
@@ -23,7 +23,6 @@ module.exports = function rhymes ( input ) {
 			results.push( merge( word, { score: score } ) );
 		}
 	} );
-	results = sortBy( results, 'score' ).reverse().slice(0, 150);
 
 	return results;
 }

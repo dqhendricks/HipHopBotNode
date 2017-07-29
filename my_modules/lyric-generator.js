@@ -215,10 +215,7 @@ class LyricGenerator {
 	randomSegmentFromRhymingWord( rhymingWord ) {
 		// finds a segment that rhymes with rhymingWord
 		var secondHalf = null;
-		var rhymeWords = rhymes( rhymingWord );
-		
-		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
-		rhymeWords = this.shuffleArray( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
+		var rhymeWords = this.processRhymeWords( rhymes( rhymingWord ) );
 		
 		for ( var i = 0; i < rhymeWords.length; i++ ) {
 			secondHalf = this.randomSegmentFromWord( rhymeWords[i] );
@@ -226,6 +223,13 @@ class LyricGenerator {
 		}
 		
 		return secondHalf;
+	}
+	
+	processRhymeWords( rhymeWords ) {
+		// get rid of () and bad trailing elements, shuffle, sort by score, limit to 150 results
+		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
+		rhymeWords = _.shuffle( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
+		rhymeWords = _.sortBy( rhymeWords, 'score' ).reverse().slice( 0, 150 );
 	}
 	
 	formatLyricPair( lyricPair ) {
@@ -257,16 +261,6 @@ class LyricGenerator {
 		} else {
 			return keys[Math.floor( Math.random() * keys.length )];
 		}
-	}
-	
-	shuffleArray( array ) {
-		for ( var i = array.length - 1; i > 0; i-- ) {
-			var j = Math.floor( Math.random() * ( i + 1 ) );
-			var temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-		}
-		return array;
 	}
 }
 

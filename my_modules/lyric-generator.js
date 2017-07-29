@@ -215,7 +215,7 @@ class LyricGenerator {
 	randomSegmentFromRhymingWord( rhymingWord ) {
 		// finds a segment that rhymes with rhymingWord
 		var secondHalf = null;
-		var rhymeWords = this.processRhymeWords( rhymes( rhymingWord ) );
+		var rhymeWords = this.getRhymeWords( rhymingWord );
 		
 		for ( var i = 0; i < rhymeWords.length; i++ ) {
 			secondHalf = this.randomSegmentFromWord( rhymeWords[i] );
@@ -225,11 +225,13 @@ class LyricGenerator {
 		return secondHalf;
 	}
 	
-	processRhymeWords( rhymeWords ) {
+	getRhymeWords( rhymingWord ) {
+		var rhymeWords = rhymes( rhymingWord );
 		// get rid of () and bad trailing elements, shuffle, sort by score, limit to 150 results
 		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
 		rhymeWords = _.shuffle( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
 		rhymeWords = _.sortBy( rhymeWords, 'score' ).reverse().slice( 0, 150 );
+		return rhymeWords;
 	}
 	
 	formatLyricPair( lyricPair ) {

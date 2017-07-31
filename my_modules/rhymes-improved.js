@@ -27,8 +27,6 @@ module.exports = function rhymes ( input ) {
 	return results;
 }
 
-module.exports.words = words;
-
 function countMatchingTrailingSyllablesInPronunciations ( a, b ) {
 	a = a.split(' ').reverse();
 	b = b.split(' ').reverse();

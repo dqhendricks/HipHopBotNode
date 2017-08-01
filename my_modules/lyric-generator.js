@@ -36,7 +36,8 @@ class LyricGenerator {
 			'cock': 'c**k',
 			'cunt': 'c**t',
 			'shit': 's**t',
-			'nigga': 'n***a'
+			'nigga': 'n***a',
+			'dick': 'd**k'
 		};
 	}
 	

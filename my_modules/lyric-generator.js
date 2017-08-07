@@ -21,14 +21,9 @@ class LyricGenerator {
 			'my',
 			'of',
 			'its',
-			'it\'s',
 			'or',
 			'whether',
-			'i\'m',
-			'i\'d',
-			'you\'re',
-			'your',
-			'we\'ll'
+			'your'
 		];
 		this.mutedWords = {
 			'fuck': 'f**k',
@@ -37,7 +32,8 @@ class LyricGenerator {
 			'cunt': 'c**t',
 			'shit': 's**t',
 			'nigga': 'n***a',
-			'dick': 'd**k'
+			'dick': 'd**k',
+			'pussy': 'p***y'
 		};
 	}
 	
@@ -230,9 +226,11 @@ class LyricGenerator {
 	
 	getRhymeWords( rhymingWord ) {
 		var rhymeWords = rhymes( rhymingWord );
-		// get rid of () and bad trailing elements, shuffle, sort by score, limit to 150 results
+		// get rid of () and bad trailing and apostrophe elements, shuffle, sort by score, limit to 150 results
 		rhymeWords.forEach( ( rhymeWord, index ) => { rhymeWords[index] = rhymeWord.word.replace( /\(.*?\)/g, '' ) } );
-		rhymeWords = _.shuffle( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ) );
+		rhymeWords = _.shuffle( _.difference( rhymeWords, this.badTrailingElements, [ rhymingWord ] ).filter( word => {
+			return !( word.includes( "'" ) );
+		} ) );
 		rhymeWords = _.sortBy( rhymeWords, 'score' ).reverse().slice( 0, 150 );
 		return rhymeWords;
 	}

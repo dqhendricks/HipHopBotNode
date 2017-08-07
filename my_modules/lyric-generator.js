@@ -193,7 +193,7 @@ class LyricGenerator {
 		var rhymeWord;
 		do {
 			rhymeWord = this.randomProperty( this.data ).split( ' ' )[1];
-		} while ( this.badTrailingElements.includes( rhymeWord ) );
+		} while ( this.badTrailingElements.includes( rhymeWord ) || rhymeWord.includes( "'" ) );
 		return rhymeWord;
 	}
 	

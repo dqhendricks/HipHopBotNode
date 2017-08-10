@@ -33,7 +33,9 @@ class LyricGenerator {
 			'shit': 's**t',
 			'nigga': 'n***a',
 			'dick': 'd**k',
-			'pussy': 'p***y'
+			'pussy': 'p***y',
+			'fagot': 'f****t',
+			'faggot': 'f****t'
 		};
 	}
 	

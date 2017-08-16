@@ -246,7 +246,7 @@ class LyricGenerator {
 	formatSentence( sentence ) {
 		// muting and other post processing
 		_.forIn( this.mutedWords, ( value, key ) => {
-			sentence = sentence.replace( key, value );
+			sentence = sentence.replace( new RegExp( key, 'g' ), value );
 		} );
 		return `${ this.capitalizeFirstLetter( this.capitalizeIs( sentence ) ) }`;
 	}
